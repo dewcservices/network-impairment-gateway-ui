@@ -1,36 +1,41 @@
-import { Component, ElementRef, Inject } from '@angular/core';
-import { ComponentContainer } from 'golden-layout';
-import { BaseComponentDirective } from '../base-component.directive';
+import { Component, ElementRef, Inject } from '@angular/core'
+import { ComponentContainer } from 'golden-layout'
+import { BaseComponentDirective } from '../base-component.directive'
 
 @Component({
   selector: 'app-boolean-component',
   templateUrl: './boolean.component.html',
-  styleUrls: ['./boolean.component.scss']
+  styleUrls: ['./boolean.component.scss'],
 })
 export class BooleanComponent extends BaseComponentDirective {
-  private value: boolean;
-  public initialValue: boolean;
+  private value: boolean
+  public initialValue: boolean
 
-  constructor(@Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken) private container: ComponentContainer, elRef: ElementRef) {
-    super(elRef.nativeElement);
+  constructor(
+    @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
+    private container: ComponentContainer,
+    elRef: ElementRef,
+  ) {
+    super(elRef.nativeElement)
 
-    this.container.stateRequestEvent = () => this.handleContainerStateRequestEvent();
+    this.container.stateRequestEvent = () =>
+      this.handleContainerStateRequestEvent()
 
-    const state = this.container.initialState;
-    this.value = state as boolean;
-    this.initialValue = this.value;
+    const state = this.container.initialState
+    this.value = state as boolean
+    this.initialValue = this.value
   }
-  
 
   updateValue(value: boolean) {
-    this.value = value;
+    this.value = value
   }
 
   handleContainerStateRequestEvent(): boolean {
-    return this.value;
+    return this.value
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace BooleanComponent {
-  export const componentTypeName = 'Boolean';
+  export const componentTypeName = 'Boolean'
 }
