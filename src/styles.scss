@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import "css/goldenlayout-base.css";
-@import "css/themes/goldenlayout-light-theme.css";
+@import 'css/goldenlayout-base.css';
+@import 'css/themes/goldenlayout-dark-theme.css';
 
-html, body { height: 100%; }
-body { width: 100%; height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

@@ -19,6 +19,8 @@ import { ComposableTestComponent } from './pages/composable-test/composable-test
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component'
 import { HomeComponent } from './pages/home/home.component'
 
+import { GoldenLayoutComponentService } from './services/golden-layout/golden-layout-component.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,7 @@ import { HomeComponent } from './pages/home/home.component'
     ReactiveFormsModule,
     FormlyMaterialModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [GoldenLayoutComponentService, provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
