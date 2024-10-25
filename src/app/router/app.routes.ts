@@ -6,6 +6,11 @@ import { ComposableTestComponent } from '../pages/composable-test/composable-tes
 import { HomeComponent } from '../pages/home/home.component'
 import { NotFoundPageComponent } from '../pages/not-found-page/not-found-page.component'
 
+import { BearerFormComponent } from '../components/bearer/bearer-form/bearer-form.component'
+import { EnvironmentFormComponent } from '../components/environment/environment-form/environment-form.component'
+import { ImpairmentFormComponent } from '../components/impairment-form/impairment-form.component'
+import { NetworkMonitorComponent } from '../components/network-monitor/network-monitor.component'
+
 export const APP_ROUTES: Routes = [
   {
     path: '',
@@ -22,6 +27,22 @@ export const APP_ROUTES: Routes = [
   {
     path: 'test',
     component: ComposableTestComponent,
+  },
+  {
+    path: 'bearer-form',
+    component: BearerFormComponent,
+  },
+  {
+    path: 'environment-form',
+    component: EnvironmentFormComponent,
+  },
+  {
+    path: 'impairment-form',
+    component: ImpairmentFormComponent,
+  },
+  {
+    path: 'network-monitor',
+    component: NetworkMonitorComponent,
   },
   {
     path: '**',
