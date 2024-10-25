@@ -1,1 +1,15 @@
-<p>environment-form works!</p>
+<form [formGroup]="form" *ngIf="mode !== 'view'" (ngSubmit)="submit()">
+  <formly-form
+    [model]="model"
+    [fields]="fields"
+    [options]="options"
+    [form]="form"
+  ></formly-form>
+  <button *ngIf="mode === 'create'" type="submit" class="btn btn-primary">
+    Submit
+  </button>
+</form>
+
+<div *ngIf="mode === 'view'">
+  <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+</div>

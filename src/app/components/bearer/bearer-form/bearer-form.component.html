@@ -1,12 +1,15 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" *ngIf="mode !== 'view'" (ngSubmit)="submit()">
   <formly-form
-    [form]="form"
-    [fields]="fields"
     [model]="model"
+    [fields]="fields"
     [options]="options"
-  >
-  </formly-form>
-  <button *ngIf="mode !== 'view'" type="submit" class="btn btn-primary">
+    [form]="form"
+  ></formly-form>
+  <button *ngIf="mode === 'create'" type="submit" class="btn btn-primary">
     Submit
   </button>
 </form>
+
+<div *ngIf="mode === 'view'">
+  <formly-form [model]="model" [fields]="fields" [form]="form"></formly-form>
+</div>
