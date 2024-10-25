@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
 import { AppRoutingModule } from './router/app-routing.module'
 import { AppComponent } from './app.component'
@@ -20,6 +21,11 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
 import { HomeComponent } from './pages/home/home.component'
 
 import { GoldenLayoutComponentService } from './services/golden-layout/golden-layout-component.service'
+import { BearerFormComponent } from './components/bearer/bearer-form/bearer-form.component'
+import { EnvironmentFormComponent } from './components/environment/environment-form/environment-form.component'
+import { ImpairmentFormComponent } from './components/impairment-form/impairment-form.component'
+import { HttpService } from './services/http-service.service';
+import { NetworkMonitorComponent } from './components/network-monitor/network-monitor.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +39,10 @@ import { GoldenLayoutComponentService } from './services/golden-layout/golden-la
     ComposableTestComponent,
     DefaultLayoutComponent,
     HomeComponent,
+    BearerFormComponent,
+    EnvironmentFormComponent,
+    ImpairmentFormComponent,
+    NetworkMonitorComponent,
   ],
   imports: [
     // material
@@ -43,7 +53,12 @@ import { GoldenLayoutComponentService } from './services/golden-layout/golden-la
     ReactiveFormsModule,
     FormlyMaterialModule,
   ],
-  providers: [GoldenLayoutComponentService, provideAnimationsAsync()],
+  providers: [
+    GoldenLayoutComponentService,
+    provideAnimationsAsync(),
+    HttpService,
+    provideHttpClient(withInterceptorsFromDi()), // Replaces HttpClientModule
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
