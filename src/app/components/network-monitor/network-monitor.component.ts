@@ -1,16 +1,25 @@
-import { Component } from '@angular/core'
+import { Component, OnInit, ElementRef } from '@angular/core'
 import { WebSocketService } from '../../services/web-socket.service'
+import { BaseComponentDirective } from '../golden-layout/base-component.directive'
 
 @Component({
   selector: 'app-network-monitor',
   templateUrl: './network-monitor.component.html',
   styleUrl: './network-monitor.component.scss',
 })
-export class NetworkMonitorComponent {
-  rxPerSec: number = 0
-  txPerSec: number = 0
+export class NetworkMonitorComponent
+  extends BaseComponentDirective
+  implements OnInit
+{
+  rxPerSec = 0
+  txPerSec = 0
 
-  constructor(private webSocketService: WebSocketService) {}
+  constructor(
+    elRef: ElementRef,
+    private webSocketService: WebSocketService,
+  ) {
+    super(elRef.nativeElement)
+  }
 
   ngOnInit(): void {
     this.webSocketService.getNetworkStats().subscribe((data) => {
@@ -18,4 +27,9 @@ export class NetworkMonitorComponent {
       this.txPerSec = data.tx
     })
   }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace NetworkMonitorComponent {
+  export const componentTypeName = 'NetworkMonitor'
 }
