@@ -1,16 +1,22 @@
-import { Component } from '@angular/core'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Component, Inject, OnInit, ElementRef } from '@angular/core'
+import { ComponentContainer } from 'golden-layout'
 import { FormGroup } from '@angular/forms'
 import { FormlyFieldConfig } from '@ngx-formly/core'
 import { BearerDetailsDTO } from '../../dtos/bearer-details-dto'
 import { EnvironmentDetailsDTO } from '../../dtos/environment-details-dto'
 import { HttpService } from '../../services/http-service.service'
+import { BaseComponentDirective } from '../golden-layout/base-component.directive'
 
 @Component({
   selector: 'app-impairment-form',
   templateUrl: './impairment-form.component.html',
   styleUrl: './impairment-form.component.scss',
 })
-export class ImpairmentFormComponent {
+export class ImpairmentFormComponent
+  extends BaseComponentDirective
+  implements OnInit
+{
   form = new FormGroup({})
   model = {
     bearer: -1,
@@ -45,7 +51,37 @@ export class ImpairmentFormComponent {
     },
   ]
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
+    private container: ComponentContainer,
+    elRef: ElementRef,
+    private httpService: HttpService,
+  ) {
+    super(elRef.nativeElement)
+    this.container.stateRequestEvent = () =>
+      this.handleContainerStateRequestEvent()
+
+    const state = this.container.initialState
+    this.model = state as any
+
+    this.httpService.getBearers().subscribe((data: BearerDetailsDTO[]) => {
+      this.bearers = data
+      this.fields[0].props!.options = this.bearers.map((bearer) => ({
+        value: bearer.id,
+        label: bearer.title,
+      }))
+    })
+
+    this.httpService
+      .getEnvironments()
+      .subscribe((data: EnvironmentDetailsDTO[]) => {
+        this.environments = data
+        this.fields[1].props!.options = this.environments.map((env) => ({
+          value: env.id,
+          label: env.title,
+        }))
+      })
+  }
 
   ngOnInit(): void {
     // Fetch bearers and environments from the API
@@ -91,4 +127,16 @@ export class ImpairmentFormComponent {
         })
     }
   }
+  updateValue(model: any) {
+    this.model = model
+  }
+
+  handleContainerStateRequestEvent(): any {
+    return this.model
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace ImpairmentFormComponent {
+  export const componentTypeName = 'ImpairmentForm'
 }
