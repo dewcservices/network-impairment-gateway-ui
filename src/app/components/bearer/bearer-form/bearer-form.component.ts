@@ -8,7 +8,7 @@ import { bearerFormlyFields } from '../bearer-formly-fields'
   templateUrl: './bearer-form.component.html',
   styleUrl: './bearer-form.component.scss',
 })
-export class BearerFormComponent {
+export class BearerFormComponent implements OnInit {
   @Input() mode: 'create' | 'view' = 'create' // Controls form behavior
   @Input() model: any = {} // Pass an existing bearer for edit or view
   form = new FormGroup({})

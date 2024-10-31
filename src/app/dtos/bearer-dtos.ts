@@ -11,3 +11,9 @@ export class BearerDetailsDTO {
     this.img = img
   }
 }
+
+export interface BearerDTO {
+  id: number
+  name: string
+  // Add other properties as needed
+}

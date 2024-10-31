@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core'
 import { environmentFormlyFields } from '../environment-formly-fields' // Adjust path as necessary
@@ -8,7 +8,7 @@ import { environmentFormlyFields } from '../environment-formly-fields' // Adjust
   templateUrl: './environment-form.component.html',
   styleUrl: './environment-form.component.scss',
 })
-export class EnvironmentFormComponent {
+export class EnvironmentFormComponent implements OnInit {
   @Input() mode: 'create' | 'view' = 'create' // Add a mode input property (default is 'create')
   @Input() model: any = {} // Model for the form data (can be passed for view mode)
   form = new FormGroup({})

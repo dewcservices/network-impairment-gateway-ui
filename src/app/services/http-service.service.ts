@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { BearerDetailsDTO } from '../dtos/bearer-details-dto'
-import { EnvironmentDetailsDTO } from '../dtos/environment-details-dto'
+import { BearerDetailsDTO } from '../dtos/bearer-dtos'
+import { EnvironmentDetailsDTO } from '../dtos/environment-dtos'
 
 @Injectable({
   providedIn: 'root',
