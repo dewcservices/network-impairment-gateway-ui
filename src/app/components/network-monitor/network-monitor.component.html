@@ -5,4 +5,32 @@
   <mat-card-content
     ><p>Tx Per Second: {{ txPerSec }} bytes</p></mat-card-content
   >
+  <mat-card-content
+    ><p>
+      Rx Packets Per Second: {{ packets_recv_per_sec }} packets
+    </p></mat-card-content
+  >
+  <mat-card-content
+    ><p>
+      Tx Packets Per Second: {{ packets_sent_per_sec }} packets
+    </p></mat-card-content
+  >
+  <mat-card-content
+    ><p>
+      Rx Errors Per Second: {{ errors_rx_per_sec }} errors
+    </p></mat-card-content
+  >
+
+  <mat-card-content
+    ><p>
+      Tx Errors Per Second: {{ errors_tx_per_sec }} errors
+    </p></mat-card-content
+  >
+  <mat-card-content
+    ><p>Rx Dropped Per Second: {{ dropped_rx_per_sec }}</p></mat-card-content
+  >
+
+  <mat-card-content
+    ><p>Tx Dropped Per Second: {{ dropped_tx_per_sec }}</p></mat-card-content
+  >
 </mat-card>

@@ -20,7 +20,8 @@ export class ImpairmentFormComponent
   form = new FormGroup({})
   model = {
     bearer: -1,
-    environment: -1,
+    uplinkEnvironment: -1,
+    downlinkEnvironment: -1,
   }
 
   bearers: BearerDetailsDTO[] = []
@@ -39,10 +40,21 @@ export class ImpairmentFormComponent
       },
     },
     {
-      key: 'environment',
+      key: 'uplink_environment',
       type: 'select',
       templateOptions: {
-        label: 'Select Environment',
+        label: 'Select Uplink Environment',
+        required: true,
+        options: [],
+        valueProp: 'value',
+        labelProp: 'label',
+      },
+    },
+    {
+      key: 'downlink_environment',
+      type: 'select',
+      templateOptions: {
+        label: 'Select Downlink Environment',
         required: true,
         options: [],
         valueProp: 'value',
@@ -80,6 +92,11 @@ export class ImpairmentFormComponent
           value: env.id,
           label: env.title,
         }))
+
+        this.fields[2].props!.options = this.environments.map((env) => ({
+          value: env.id,
+          label: env.title,
+        }))
       })
   }
 
@@ -107,13 +124,25 @@ export class ImpairmentFormComponent
   onSubmit() {
     if (this.form.valid) {
       const selectedBearerId = this.model.bearer
-      const selectedEnvironmentId = this.model.environment
+      const selectedUplinkEnvironmentId = this.model.uplinkEnvironment
+      const selectedDownlinkEnvironmentId = this.model.downlinkEnvironment
 
       // Backend call to set the impairment
       console.log('Selected Bearer ID:', selectedBearerId)
-      console.log('Selected Environment ID:', selectedEnvironmentId)
+      console.log(
+        'Selected Uplink Environment ID:',
+        selectedUplinkEnvironmentId,
+      )
+      console.log(
+        'Selected Downlink Environment ID:',
+        selectedDownlinkEnvironmentId,
+      )
       this.httpService
-        .setImpairment(selectedBearerId, selectedEnvironmentId)
+        .setImpairment(
+          selectedBearerId,
+          selectedUplinkEnvironmentId,
+          selectedDownlinkEnvironmentId,
+        )
         .subscribe({
           next: (response) => {
             console.log('Impairment set successfully', response)

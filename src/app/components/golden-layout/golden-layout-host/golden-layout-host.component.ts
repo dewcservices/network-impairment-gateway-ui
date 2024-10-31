@@ -21,6 +21,7 @@ import { TextComponent } from '../text/text.component'
 import { GoldenLayoutComponentService } from '../../../services/golden-layout/golden-layout-component.service'
 import { ImpairmentFormComponent } from '../../impairment-form/impairment-form.component'
 import { NetworkMonitorComponent } from '../../network-monitor/network-monitor.component'
+import { EnvironmentCardComponent } from '../../environment/environment-card/environment-card.component'
 
 // import { FormWizardComponent } from '../../form-wizard/form-wizard.component';
 @Component({
@@ -84,6 +85,11 @@ export class GoldenLayoutHostComponent implements OnDestroy {
     this.goldenLayoutComponentService.registerComponentType(
       ColorComponent.componentTypeName,
       ColorComponent,
+    )
+
+    this.goldenLayoutComponentService.registerComponentType(
+      EnvironmentCardComponent.componentTypeName,
+      EnvironmentCardComponent,
     )
 
     this.goldenLayoutComponentService.registerComponentType(

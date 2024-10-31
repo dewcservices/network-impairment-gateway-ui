@@ -1,0 +1,28 @@
+<mat-card class="environment-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ environment.title }}</mat-card-title>
+      <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
+      <img
+        mat-card-sm-image
+        alt="optus-c1"
+        src="https://upload.wikimedia.org/wikipedia/pt/1/1f/Optus_D3.jpg"
+      />
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <hr />
+  </mat-card-content>
+  <mat-card-content>
+    <strong>Netem Configuration:</strong>
+  </mat-card-content>
+  <mat-card-content>
+    <div>
+      Delay: {{ environment.netem.delay.value }}
+      {{ environment.netem.delay.unit }}
+    </div>
+
+    <p>Loss: {{ environment.netem.loss.percentage }}%</p>
+    <p>Corruption: {{ environment.netem.corrupt.percentage }}%</p>
+  </mat-card-content>
+</mat-card>

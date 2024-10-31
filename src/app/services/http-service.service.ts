@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
@@ -13,11 +14,16 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-  setImpairment(bearerId: number, environmentId: number): Observable<any> {
+  setImpairment(
+    bearerId: number,
+    uplinkEnvironmentId: number,
+    downlinkEnvironmentId: number,
+  ): Observable<any> {
     const url = `${this.apiUrl}/settings/` // API endpoint for setting impairment
     const payload = {
       bearer_id: bearerId,
-      environment_id: environmentId,
+      uplink_environment_id: uplinkEnvironmentId,
+      downlink_environment_id: downlinkEnvironmentId,
     }
 
     return this.http.post(url, payload)

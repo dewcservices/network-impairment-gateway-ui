@@ -10,6 +10,7 @@ import { BearerFormComponent } from '../components/bearer/bearer-form/bearer-for
 import { EnvironmentFormComponent } from '../components/environment/environment-form/environment-form.component'
 import { ImpairmentFormComponent } from '../components/impairment-form/impairment-form.component'
 import { NetworkMonitorComponent } from '../components/network-monitor/network-monitor.component'
+import { EnvironmentCardComponent } from '../components/environment/environment-card/environment-card.component'
 
 export const APP_ROUTES: Routes = [
   {
@@ -35,6 +36,10 @@ export const APP_ROUTES: Routes = [
   {
     path: 'environment-form',
     component: EnvironmentFormComponent,
+  },
+  {
+    path: 'environment-card',
+    component: EnvironmentCardComponent,
   },
   {
     path: 'impairment-form',

@@ -25,7 +25,8 @@ import { BearerFormComponent } from './components/bearer/bearer-form/bearer-form
 import { EnvironmentFormComponent } from './components/environment/environment-form/environment-form.component'
 import { ImpairmentFormComponent } from './components/impairment-form/impairment-form.component'
 import { HttpService } from './services/http-service.service';
-import { NetworkMonitorComponent } from './components/network-monitor/network-monitor.component'
+import { NetworkMonitorComponent } from './components/network-monitor/network-monitor.component';
+import { EnvironmentCardComponent } from './components/environment/environment-card/environment-card.component'
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NetworkMonitorComponent } from './components/network-monitor/network-mo
     EnvironmentFormComponent,
     ImpairmentFormComponent,
     NetworkMonitorComponent,
+    EnvironmentCardComponent,
   ],
   imports: [
     // material

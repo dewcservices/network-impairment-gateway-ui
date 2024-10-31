@@ -13,6 +13,12 @@ export class NetworkMonitorComponent
 {
   rxPerSec = 0
   txPerSec = 0
+  packets_recv_per_sec = 0
+  packets_sent_per_sec = 0
+  errors_rx_per_sec = 0
+  errors_tx_per_sec = 0
+  dropped_rx_per_sec = 0
+  dropped_tx_per_sec = 0
 
   constructor(
     elRef: ElementRef,
@@ -23,8 +29,14 @@ export class NetworkMonitorComponent
 
   ngOnInit(): void {
     this.webSocketService.getNetworkStats().subscribe((data) => {
-      this.rxPerSec = data.rx
-      this.txPerSec = data.tx
+      this.rxPerSec = data.bytes_recv_per_sec
+      this.txPerSec = data.bytes_sent_per_sec
+      this.packets_recv_per_sec = data.packets_recv_per_sec
+      this.packets_sent_per_sec = data.packets_sent_per_sec
+      this.errors_rx_per_sec = data.errors_rx_per_sec
+      this.errors_tx_per_sec = data.errors_tx_per_sec
+      this.dropped_rx_per_sec = data.dropped_rx_per_sec
+      this.dropped_tx_per_sec = data.dropped_tx_per_sec
     })
   }
 }
