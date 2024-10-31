@@ -16,8 +16,8 @@ export class HttpService {
   setImpairment(bearerId: number, environmentId: number): Observable<any> {
     const url = `${this.apiUrl}/settings/` // API endpoint for setting impairment
     const payload = {
-      bearerId: bearerId,
-      environmentId: environmentId,
+      bearer_id: bearerId,
+      environment_id: environmentId,
     }
 
     return this.http.post(url, payload)
