@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // impairment.service.ts
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable, combineLatest } from 'rxjs'
-import { map, take } from 'rxjs/operators'
+import { Observable, tap } from 'rxjs'
 import { BearerService } from './bearer.service'
 import { EnvironmentService } from './environment.service'
+import { EnvironmentType } from '../dtos/environment-dtos'
+import { ImpairmentDTO } from '../dtos/impairment-dtos'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImpairmentService {
-  private apiUrl = '/api/set-impairment'
+  private apiUrl = `${environment.apiHost}/api/settings/`
 
   constructor(
     private http: HttpClient,
@@ -18,30 +21,47 @@ export class ImpairmentService {
     private environmentService: EnvironmentService,
   ) {}
 
-  setImpairment(): Observable<any> {
-    // Combine the latest values of bearer, uplink environment, and downlink environment
-    return combineLatest([
-      this.bearerService.currentBearer$,
-      this.environmentService.uplinkEnvironment$,
-      this.environmentService.downlinkEnvironment$,
-    ]).pipe(
-      take(1), // Take the latest values only once
-      map(([bearer, uplinkEnv, downlinkEnv]) => {
-        if (!bearer || !uplinkEnv || !downlinkEnv) {
-          throw new Error(
-            'Bearer, uplink environment, or downlink environment is not set.',
-          )
-        }
-        // Construct the payload
-        const payload = {
-          bearer_id: bearer.id,
-          uplink_environment_id: uplinkEnv.id,
-          downlink_environment_id: downlinkEnv.id,
-        }
-        return payload
+  getImpairment(): Observable<ImpairmentDTO> {
+    return this.http.get<ImpairmentDTO>(this.apiUrl).pipe(
+      tap((data) => {
+        this.refresh(
+          data.bearer_id,
+          data.uplink_environment_id,
+          data.downlink_environment_id,
+        )
       }),
-      // Make the POST request to set the impairment
-      map((payload) => this.http.post(this.apiUrl, payload)),
     )
+  }
+
+  refresh(
+    bearerId: number,
+    uplinkEnvironmentId: number,
+    downlinkEnvironmentId: number,
+  ): void {
+    this.bearerService.getBearer(bearerId).subscribe()
+
+    this.environmentService
+      .getEnvironment(uplinkEnvironmentId, EnvironmentType.UPLINK)
+      .subscribe()
+
+    this.environmentService
+      .getEnvironment(downlinkEnvironmentId, EnvironmentType.DOWNLINK)
+      .subscribe()
+  }
+
+  setImpairment(
+    bearerId: number,
+    uplinkEnvironmentId: number,
+    downlinkEnvironmentId: number,
+  ): Observable<any> {
+    this.refresh(bearerId, uplinkEnvironmentId, downlinkEnvironmentId)
+
+    const payload: ImpairmentDTO = {
+      bearer_id: bearerId,
+      uplink_environment_id: uplinkEnvironmentId,
+      downlink_environment_id: downlinkEnvironmentId,
+    }
+
+    return this.http.post<ImpairmentDTO>(this.apiUrl, payload)
   }
 }

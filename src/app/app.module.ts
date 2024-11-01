@@ -24,10 +24,13 @@ import { GoldenLayoutComponentService } from './services/golden-layout/golden-la
 import { BearerFormComponent } from './components/bearer/bearer-form/bearer-form.component'
 import { EnvironmentFormComponent } from './components/environment/environment-form/environment-form.component'
 import { ImpairmentFormComponent } from './components/impairment-form/impairment-form.component'
-import { HttpService } from './services/http-service.service';
-import { NetworkMonitorComponent } from './components/network-monitor/network-monitor.component';
+import { NetworkMonitorComponent } from './components/network-monitor/network-monitor.component'
 import { EnvironmentCardComponent } from './components/environment/environment-card/environment-card.component'
-
+import { BearerCardComponent } from './components/bearer/bearer-card/bearer-card.component'
+import { EnvironmentService } from './services/environment.service'
+import { BearerService } from './services/bearer.service'
+import { ImpairmentService } from './services/impairment.service'
+// import { LiveGraphComponent } from './components/live-graph/live-graph.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +48,7 @@ import { EnvironmentCardComponent } from './components/environment/environment-c
     ImpairmentFormComponent,
     NetworkMonitorComponent,
     EnvironmentCardComponent,
+    BearerCardComponent,
   ],
   imports: [
     // material
@@ -58,7 +62,9 @@ import { EnvironmentCardComponent } from './components/environment/environment-c
   providers: [
     GoldenLayoutComponentService,
     provideAnimationsAsync(),
-    HttpService,
+    EnvironmentService,
+    BearerService,
+    ImpairmentService,
     provideHttpClient(withInterceptorsFromDi()), // Replaces HttpClientModule
   ],
   bootstrap: [AppComponent],

@@ -1,24 +1,56 @@
-import { Component, ElementRef } from '@angular/core'
-import { EnvironmentDTO } from '../../../dtos/environment-dtos'
+import { Component, ElementRef, Inject, OnInit } from '@angular/core'
+import { EnvironmentDTO, EnvironmentType } from '../../../dtos/environment-dtos'
+import { EnvironmentService } from '../../../services/environment.service'
 import { BaseComponentDirective } from '../../golden-layout/base-component.directive'
+import { ComponentContainer } from 'golden-layout'
 
 @Component({
   selector: 'app-environment-card',
   templateUrl: './environment-card.component.html',
   styleUrl: './environment-card.component.scss',
 })
-export class EnvironmentCardComponent extends BaseComponentDirective {
-  environment: EnvironmentDTO = {
-    title: 'Optus C1 Satellite',
-    description: 'Satellite connection with DDIL impairments applied.',
+export class EnvironmentCardComponent
+  extends BaseComponentDirective
+  implements OnInit
+{
+  private envType: string
+  //selectedEnvironment: EnvironmentDTO | null = null
+  selectedEnvironment: EnvironmentDTO | null = {
+    title: 'Intermitent',
+    description: 'Intermitent.',
     netem: {
-      delay: { value: 500, unit: 'ms' },
-      loss: { percentage: 2 },
-      corrupt: { percentage: 1 },
+      delay: { time: 500, jitter: 50, correlation: 25 },
+      loss: { percentage: 2, interval: 1000, correlation: 15 },
+      corrupt: { percentage: 1, correlation: 10 },
     },
   }
-  constructor(elRef: ElementRef) {
+  constructor(
+    @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
+    private container: ComponentContainer,
+    elRef: ElementRef,
+    private envService: EnvironmentService,
+  ) {
     super(elRef.nativeElement)
+    this.container.stateRequestEvent = () =>
+      this.handleContainerStateRequestEvent()
+
+    const state = this.container.initialState
+    this.envType = state as string
+  }
+
+  ngOnInit(): void {
+    if (this.envType === EnvironmentType.DOWNLINK)
+      this.envService.downlinkEnvironment$.subscribe(
+        (env) => (this.selectedEnvironment = env),
+      )
+    else
+      this.envService.uplinkEnvironment$.subscribe(
+        (env) => (this.selectedEnvironment = env),
+      )
+  }
+
+  handleContainerStateRequestEvent(): string {
+    return this.envType
   }
 }
 

@@ -3,34 +3,33 @@
   overflow: hidden;
 }
 
-.environment-card {
+.bearer-card {
   margin: 20px;
 }
 
-.environment-card mat-card-title {
+.bearer-card mat-card-title {
   color: #e0e3e2;
   font-size: xx-large;
   padding-bottom: 20px;
 }
 
-.environment-card mat-card-content {
+.bearer-card mat-card-content {
   color: #e0e3e2;
   font-size: small;
 }
 
-.sub-heading {
-  font-size: medium;
-  font-weight: bolder;
-}
-
-.network-settings-grid {
+.links-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Three equal-width columns */
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
   gap: 16px; /* Spacing between items */
 }
 
-.network-settings-item {
+.link-item {
   padding: 8px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
+}
+.sub-heading {
+  font-size: medium;
+  font-weight: bolder;
 }

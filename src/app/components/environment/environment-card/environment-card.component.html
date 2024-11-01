@@ -1,28 +1,52 @@
-<mat-card class="environment-card" appearance="outlined">
+<mat-card class="environment-card" *ngIf="selectedEnvironment">
   <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>{{ environment.title }}</mat-card-title>
-      <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
-      <img
-        mat-card-sm-image
-        alt="optus-c1"
-        src="https://upload.wikimedia.org/wikipedia/pt/1/1f/Optus_D3.jpg"
-      />
-    </mat-card-title-group>
+    <mat-card-title>{{ selectedEnvironment.title }}</mat-card-title>
+    <mat-card-subtitle>{{ selectedEnvironment.description }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
-    <hr />
-  </mat-card-content>
-  <mat-card-content>
-    <strong>Netem Configuration:</strong>
-  </mat-card-content>
-  <mat-card-content>
-    <div>
-      Delay: {{ environment.netem.delay.value }}
-      {{ environment.netem.delay.unit }}
-    </div>
 
-    <p>Loss: {{ environment.netem.loss.percentage }}%</p>
-    <p>Corruption: {{ environment.netem.corrupt.percentage }}%</p>
+  <mat-card-content>
+    <h5>Network Settings</h5>
+    <div class="network-settings-grid">
+      <div class="network-settings-item">
+        <div class="sub-heading">Delay</div>
+        <p>
+          <strong>Time:</strong> {{ selectedEnvironment.netem.delay.time }} ms
+        </p>
+        <p>
+          <strong>Jitter:</strong>
+          {{ selectedEnvironment.netem.delay.jitter }} ms
+        </p>
+        <p>
+          <strong>Correlation:</strong>
+          {{ selectedEnvironment.netem.delay.correlation }}%
+        </p>
+      </div>
+      <div class="network-settings-item">
+        <div class="sub-heading">Loss</div>
+        <p>
+          <strong>Percentage:</strong>
+          {{ selectedEnvironment.netem.loss.percentage }}%
+        </p>
+        <p>
+          <strong>Interval:</strong>
+          {{ selectedEnvironment.netem.loss.interval }} ms
+        </p>
+        <p>
+          <strong>Correlation:</strong>
+          {{ selectedEnvironment.netem.loss.correlation }}%
+        </p>
+      </div>
+      <div class="network-settings-item">
+        <div class="sub-heading">Corruption</div>
+        <p>
+          <strong>Percentage:</strong>
+          {{ selectedEnvironment.netem.corrupt.percentage }}%
+        </p>
+        <p>
+          <strong>Correlation:</strong>
+          {{ selectedEnvironment.netem.corrupt.correlation }}%
+        </p>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>

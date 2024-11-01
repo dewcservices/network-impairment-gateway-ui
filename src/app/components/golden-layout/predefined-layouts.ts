@@ -5,6 +5,90 @@ export interface Layout {
   config: LayoutConfig
 }
 
+const impairmentGatewayConfig: LayoutConfig = {
+  root: {
+    type: ItemType.row,
+    content: [
+      {
+        width: 60,
+        type: ItemType.column,
+        content: [
+          {
+            type: 'component',
+            id: 'impairment-form',
+            title: 'Set Impairment',
+            header: {
+              show: 'top',
+            },
+            isClosable: false,
+            componentType: 'ImpairmentForm',
+            width: 30,
+            componentState: undefined,
+          } as ComponentItemConfig,
+          {
+            title: 'Network',
+            header: { show: 'top', popout: false },
+            type: 'component',
+            componentType: 'NetworkMonitor',
+            componentState: undefined,
+          } as ComponentItemConfig,
+        ],
+      },
+      {
+        width: 90,
+        type: ItemType.column,
+        content: [
+          {
+            type: 'component',
+            id: 'bearer-card',
+            title: 'Bearer',
+            header: {
+              show: 'top',
+            },
+            isClosable: false,
+            componentType: 'BearerCard',
+            width: 30,
+            componentState: undefined,
+          } as ComponentItemConfig,
+        ],
+      },
+      {
+        width: 90,
+        type: ItemType.column,
+        content: [
+          {
+            title: 'Uplink Environment',
+            id: 'uplink-env-card',
+            header: { show: 'top', popout: false },
+            type: 'component',
+            componentType: 'EnvironmentCard',
+            componentState: undefined,
+          } as ComponentItemConfig,
+        ],
+      },
+      {
+        width: 90,
+        type: ItemType.column,
+        content: [
+          {
+            title: 'Downlink Environment',
+            id: 'downlink-env-card',
+            header: { show: 'top', popout: false },
+            type: 'component',
+            componentType: 'EnvironmentCard',
+            componentState: undefined,
+          } as ComponentItemConfig,
+        ],
+      },
+    ],
+  },
+}
+
+const impairmentGatewayLayout: Layout = {
+  name: 'impairment-gateway',
+  config: impairmentGatewayConfig,
+}
+
 const miniRowConfig: LayoutConfig = {
   root: {
     type: ItemType.row,
@@ -427,6 +511,7 @@ export const predefinedLayouts: readonly Layout[] = [
   responsiveLayout,
   standardLayout,
   tabDropdownLayout,
+  impairmentGatewayLayout,
 ]
 export const predefinedLayoutNames: readonly string[] = predefinedLayouts.map(
   (layout) => layout.name,

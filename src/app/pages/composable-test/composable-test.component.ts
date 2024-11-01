@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core'
 import { ControlsComponent } from '../../components/golden-layout/controls/controls.component'
 import { GoldenLayoutHostComponent } from '../../components/golden-layout/golden-layout-host/golden-layout-host.component'
+import { ImpairmentService } from '../../services/impairment.service'
 
 @Component({
   selector: 'app-composable-test',
@@ -15,6 +16,10 @@ export class ComposableTestComponent implements AfterViewInit {
   @ViewChild('controls') private _controlsComponent!: ControlsComponent
   @ViewChild('goldenLayoutHost')
   private _goldenLayoutHostComponent!: GoldenLayoutHostComponent
+
+  constructor(private impairmentService: ImpairmentService) {
+    this.impairmentService.getImpairment().subscribe()
+  }
 
   ngAfterViewInit() {
     setTimeout(() => {

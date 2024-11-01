@@ -11,6 +11,9 @@ export class WebSocketService {
   private socket: WebSocket
   private subject: Subject<any>
 
+  private dataSubject = new Subject<{ txRate: number; rxRate: number }>()
+  dataStream = this.dataSubject.asObservable()
+
   constructor() {
     this.socket = new WebSocket(`${this.wsUrl}/ws/network`)
     this.subject = new Subject<any>()
@@ -19,6 +22,12 @@ export class WebSocketService {
       const data = JSON.parse(event.data)
       this.subject.next(data) // Pass the data to the observable
     }
+
+    setInterval(() => {
+      const txRate = Math.random() * 100
+      const rxRate = Math.random() * 100
+      this.dataSubject.next({ txRate, rxRate })
+    }, 1000)
   }
 
   getNetworkStats(): Observable<any> {

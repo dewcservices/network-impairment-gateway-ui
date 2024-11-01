@@ -3,9 +3,11 @@ import { Component, Inject, OnInit, ElementRef } from '@angular/core'
 import { ComponentContainer } from 'golden-layout'
 import { FormGroup } from '@angular/forms'
 import { FormlyFieldConfig } from '@ngx-formly/core'
-import { BearerDetailsDTO } from '../../dtos/bearer-details-dto'
-import { EnvironmentDetailsDTO } from '../../dtos/environment-details-dto'
-import { HttpService } from '../../services/http-service.service'
+import { BearerDetailsDTO } from '../../dtos/bearer-dtos'
+import { EnvironmentDetailsDTO } from '../../dtos/environment-dtos'
+import { EnvironmentService } from '../../services/environment.service'
+import { ImpairmentService } from '../../services/impairment.service'
+import { BearerService } from '../../services/bearer.service'
 import { BaseComponentDirective } from '../golden-layout/base-component.directive'
 
 @Component({
@@ -40,7 +42,7 @@ export class ImpairmentFormComponent
       },
     },
     {
-      key: 'uplink_environment',
+      key: 'uplinkEnvironment',
       type: 'select',
       templateOptions: {
         label: 'Select Uplink Environment',
@@ -51,7 +53,7 @@ export class ImpairmentFormComponent
       },
     },
     {
-      key: 'downlink_environment',
+      key: 'downlinkEnvironment',
       type: 'select',
       templateOptions: {
         label: 'Select Downlink Environment',
@@ -67,7 +69,9 @@ export class ImpairmentFormComponent
     @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
     private container: ComponentContainer,
     elRef: ElementRef,
-    private httpService: HttpService,
+    private envService: EnvironmentService,
+    private bearerService: BearerService,
+    private impairmentService: ImpairmentService,
   ) {
     super(elRef.nativeElement)
     this.container.stateRequestEvent = () =>
@@ -76,7 +80,33 @@ export class ImpairmentFormComponent
     const state = this.container.initialState
     this.model = state as any
 
-    this.httpService.getBearers().subscribe((data: BearerDetailsDTO[]) => {
+    // this.bearerService.getBearers().subscribe((data: BearerDetailsDTO[]) => {
+    //   this.bearers = data
+    //   this.fields[0].props!.options = this.bearers.map((bearer) => ({
+    //     value: bearer.id,
+    //     label: bearer.title,
+    //   }))
+    // })
+
+    // this.envService
+    //   .getEnvironments()
+    //   .subscribe((data: EnvironmentDetailsDTO[]) => {
+    //     this.environments = data
+    //     this.fields[1].props!.options = this.environments.map((env) => ({
+    //       value: env.id,
+    //       label: env.title,
+    //     }))
+
+    //     this.fields[2].props!.options = this.environments.map((env) => ({
+    //       value: env.id,
+    //       label: env.title,
+    //     }))
+    //   })
+  }
+
+  ngOnInit(): void {
+    // Fetch bearers and environments from the API
+    this.bearerService.getBearers().subscribe((data: BearerDetailsDTO[]) => {
       this.bearers = data
       this.fields[0].props!.options = this.bearers.map((bearer) => ({
         value: bearer.id,
@@ -84,7 +114,7 @@ export class ImpairmentFormComponent
       }))
     })
 
-    this.httpService
+    this.envService
       .getEnvironments()
       .subscribe((data: EnvironmentDetailsDTO[]) => {
         this.environments = data
@@ -94,27 +124,6 @@ export class ImpairmentFormComponent
         }))
 
         this.fields[2].props!.options = this.environments.map((env) => ({
-          value: env.id,
-          label: env.title,
-        }))
-      })
-  }
-
-  ngOnInit(): void {
-    // Fetch bearers and environments from the API
-    this.httpService.getBearers().subscribe((data: BearerDetailsDTO[]) => {
-      this.bearers = data
-      this.fields[0].props!.options = this.bearers.map((bearer) => ({
-        value: bearer.id,
-        label: bearer.title,
-      }))
-    })
-
-    this.httpService
-      .getEnvironments()
-      .subscribe((data: EnvironmentDetailsDTO[]) => {
-        this.environments = data
-        this.fields[1].props!.options = this.environments.map((env) => ({
           value: env.id,
           label: env.title,
         }))
@@ -137,7 +146,7 @@ export class ImpairmentFormComponent
         'Selected Downlink Environment ID:',
         selectedDownlinkEnvironmentId,
       )
-      this.httpService
+      this.impairmentService
         .setImpairment(
           selectedBearerId,
           selectedUplinkEnvironmentId,

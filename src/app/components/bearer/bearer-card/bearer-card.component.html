@@ -1,0 +1,64 @@
+<mat-card class="bearer-card" *ngIf="selectedBearer">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ selectedBearer.title }}</mat-card-title>
+      <mat-card-subtitle>{{ selectedBearer.description }}</mat-card-subtitle>
+      <img
+        *ngIf="selectedBearer.img"
+        mat-card-image
+        [src]="selectedBearer.img"
+        alt="{{ selectedBearer.title }}"
+      />
+    </mat-card-title-group>
+  </mat-card-header>
+
+  <mat-card-content>
+    <h5>Links</h5>
+    <div class="links-grid">
+      <div class="link-item" *ngFor="let linkKey of bearerLinksKeys()">
+        <h6>{{ linkKey }}</h6>
+        <div *ngIf="selectedBearer.links[linkKey].hbt">
+          <div class="sub-heading">Bandwidth Settings</div>
+          <p>
+            <strong>Rate:</strong>
+            {{ selectedBearer.links[linkKey].hbt.rate.value }}
+            {{ selectedBearer.links[linkKey].hbt.rate.unit }}
+          </p>
+          <p>
+            <strong>Ceil:</strong>
+            {{ selectedBearer.links[linkKey].hbt.ceil.value }}
+            {{ selectedBearer.links[linkKey].hbt.ceil.unit }}
+          </p>
+        </div>
+        <hr />
+        <div *ngIf="selectedBearer.links[linkKey].netem">
+          <div class="sub-heading">Network Settings</div>
+          <p>
+            <strong>Delay:</strong>
+            {{ selectedBearer.links[linkKey].netem.delay.time }} ms
+          </p>
+          <p>
+            <strong>Jitter:</strong>
+            {{ selectedBearer.links[linkKey].netem.delay.jitter }} ms
+          </p>
+          <p>
+            <strong>Correlation:</strong>
+            {{ selectedBearer.links[linkKey].netem.delay.correlation }}%
+          </p>
+          <p>
+            <strong>Loss Percentage:</strong>
+            {{ selectedBearer.links[linkKey].netem.loss.percentage }}%
+          </p>
+          <p>
+            <strong>Loss Interval:</strong>
+            {{ selectedBearer.links[linkKey].netem.loss.interval }} ms
+          </p>
+          <p>
+            <strong>Loss Correlation:</strong>
+            {{ selectedBearer.links[linkKey].netem.loss.correlation }}%
+          </p>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

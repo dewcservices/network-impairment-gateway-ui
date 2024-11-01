@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable, BehaviorSubject } from 'rxjs'
-import { EnvironmentDTO, EnvironmentDetailsDTO } from '../dtos/environment-dtos'
+import { Observable, BehaviorSubject, tap } from 'rxjs'
+import {
+  EnvironmentDTO,
+  EnvironmentDetailsDTO,
+  EnvironmentType,
+} from '../dtos/environment-dtos'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnvironmentService {
-  private apiUrl = '/api/environments'
+  private apiUrl = `${environment.apiHost}/api/environments`
 
   private uplinkEnvironmentSubject = new BehaviorSubject<EnvironmentDTO | null>(
     null,
@@ -22,11 +27,22 @@ export class EnvironmentService {
   downlinkEnvironment$ = this.downlinkEnvironmentSubject.asObservable()
 
   getEnvironments(): Observable<EnvironmentDetailsDTO[]> {
-    return this.http.get<EnvironmentDetailsDTO[]>(this.apiUrl)
+    return this.http.get<EnvironmentDetailsDTO[]>(`${this.apiUrl}/`)
   }
 
-  getEnvironment(id: number): Observable<EnvironmentDTO> {
-    return this.http.get<EnvironmentDTO>(`${this.apiUrl}/${id}`)
+  getEnvironment(
+    id: number,
+    type: EnvironmentType,
+  ): Observable<EnvironmentDTO> {
+    return this.http.get<EnvironmentDTO>(`${this.apiUrl}/${id}`).pipe(
+      tap((environment: EnvironmentDTO) => {
+        if (type === EnvironmentType.UPLINK) {
+          this.setUplinkEnvironment(environment)
+        } else if (type === EnvironmentType.DOWNLINK) {
+          this.setDownlinkEnvironment(environment)
+        }
+      }),
+    )
   }
 
   setUplinkEnvironment(environment: EnvironmentDTO) {
