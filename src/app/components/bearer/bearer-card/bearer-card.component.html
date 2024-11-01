@@ -5,6 +5,7 @@
         <mat-card-title>{{ selectedBearer.title }}</mat-card-title>
         <mat-card-subtitle>{{ selectedBearer.description }}</mat-card-subtitle>
         <img
+          class="card-img"
           *ngIf="selectedBearer.img"
           mat-card-image
           [src]="selectedBearer.img"

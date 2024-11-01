@@ -3,8 +3,18 @@
   overflow: hidden;
 }
 
+.golden-layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
 .environment-card {
-  margin: 20px;
+  height: 100%; /* Fills height of the parent */
+  width: 100%; /* Fills width of the parent */
+  background-color: transparent !important;
 }
 
 .environment-card mat-card-title {
@@ -16,6 +26,10 @@
 .environment-card mat-card-content {
   color: #e0e3e2;
   font-size: small;
+  flex-grow: 1; /* Allows card content to fill the available space */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .sub-heading {

@@ -24,6 +24,7 @@ export class LiveGraphComponent
         fill: false,
         tension: 0.5,
         borderColor: 'blue',
+        backgroundColor: 'rgba(0, 0, 255, 0.3)',
       },
       {
         data: [],
@@ -31,6 +32,7 @@ export class LiveGraphComponent
         fill: false,
         tension: 0.5,
         borderColor: 'green',
+        backgroundColor: 'rgba(0, 255, 0, 0.3)',
       },
     ],
     labels: [],
@@ -38,12 +40,13 @@ export class LiveGraphComponent
 
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
+    maintainAspectRatio: false, // Important for Golden Layout responsiveness
     scales: {
       x: {
         title: { display: true, text: 'Time' },
       },
       y: {
-        title: { display: true, text: 'Rate' },
+        title: { display: true, text: 'Bytes' },
         min: 0,
       },
     },

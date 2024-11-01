@@ -21,9 +21,9 @@ export class ImpairmentFormComponent
 {
   form = new FormGroup({})
   model = {
-    bearer: -1,
-    uplinkEnvironment: -1,
-    downlinkEnvironment: -1,
+    bearer: 1,
+    uplinkEnvironment: 1,
+    downlinkEnvironment: 1,
   }
 
   bearers: BearerDetailsDTO[] = []
@@ -79,29 +79,6 @@ export class ImpairmentFormComponent
 
     const state = this.container.initialState
     this.model = state as any
-
-    // this.bearerService.getBearers().subscribe((data: BearerDetailsDTO[]) => {
-    //   this.bearers = data
-    //   this.fields[0].props!.options = this.bearers.map((bearer) => ({
-    //     value: bearer.id,
-    //     label: bearer.title,
-    //   }))
-    // })
-
-    // this.envService
-    //   .getEnvironments()
-    //   .subscribe((data: EnvironmentDetailsDTO[]) => {
-    //     this.environments = data
-    //     this.fields[1].props!.options = this.environments.map((env) => ({
-    //       value: env.id,
-    //       label: env.title,
-    //     }))
-
-    //     this.fields[2].props!.options = this.environments.map((env) => ({
-    //       value: env.id,
-    //       label: env.title,
-    //     }))
-    //   })
   }
 
   ngOnInit(): void {
@@ -118,6 +95,7 @@ export class ImpairmentFormComponent
       .getEnvironments()
       .subscribe((data: EnvironmentDetailsDTO[]) => {
         this.environments = data
+
         this.fields[1].props!.options = this.environments.map((env) => ({
           value: env.id,
           label: env.title,
@@ -128,6 +106,17 @@ export class ImpairmentFormComponent
           label: env.title,
         }))
       })
+
+    this.impairmentService.uplinkEnvironment$.subscribe((impairment) => {
+      this.model.bearer = impairment!.bearer_id
+      this.model.uplinkEnvironment = impairment!.bearer_id
+      this.model.downlinkEnvironment = impairment!.downlink_environment_id
+      this.form.patchValue({
+        bearer: this.model.bearer,
+        uplinkEnvironment: this.model.uplinkEnvironment,
+        downlinkEnvironment: this.model.downlinkEnvironment,
+      })
+    })
   }
 
   onSubmit() {

@@ -18,7 +18,6 @@ import { ColorComponent } from './components/golden-layout/color/color.component
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component'
 import { ComposableTestComponent } from './pages/composable-test/composable-test.component'
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component'
-import { HomeComponent } from './pages/home/home.component'
 
 import {
   provideCharts,
@@ -37,6 +36,9 @@ import { EnvironmentService } from './services/environment.service'
 import { BearerService } from './services/bearer.service'
 import { ImpairmentService } from './services/impairment.service'
 import { LiveGraphComponent } from './components/live-graph/live-graph.component'
+import { NavbarComponent } from './components/navbar/navbar.component'
+import { ImpairmentPageComponent } from './pages/impairment-page/impairment-page.component'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   declarations: [
@@ -49,7 +51,6 @@ import { LiveGraphComponent } from './components/live-graph/live-graph.component
     NotFoundPageComponent,
     ComposableTestComponent,
     DefaultLayoutComponent,
-    HomeComponent,
     BearerFormComponent,
     EnvironmentFormComponent,
     ImpairmentFormComponent,
@@ -57,6 +58,8 @@ import { LiveGraphComponent } from './components/live-graph/live-graph.component
     EnvironmentCardComponent,
     BearerCardComponent,
     LiveGraphComponent,
+    NavbarComponent,
+    ImpairmentPageComponent,
   ],
   imports: [
     // material
@@ -67,6 +70,7 @@ import { LiveGraphComponent } from './components/live-graph/live-graph.component
     ReactiveFormsModule,
     FormlyMaterialModule,
     BaseChartDirective,
+    FontAwesomeModule,
   ],
   providers: [
     GoldenLayoutComponentService,

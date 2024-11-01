@@ -2,7 +2,7 @@
 // impairment.service.ts
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable, tap } from 'rxjs'
+import { Observable, BehaviorSubject, tap } from 'rxjs'
 import { BearerService } from './bearer.service'
 import { EnvironmentService } from './environment.service'
 import { EnvironmentType } from '../dtos/environment-dtos'
@@ -14,6 +14,11 @@ import { environment } from '../../environments/environment'
 })
 export class ImpairmentService {
   private apiUrl = `${environment.apiHost}/api/settings/`
+  private impairmentSettingsSubject = new BehaviorSubject<ImpairmentDTO | null>(
+    null,
+  )
+  // Observable streams
+  uplinkEnvironment$ = this.impairmentSettingsSubject.asObservable()
 
   constructor(
     private http: HttpClient,
@@ -21,9 +26,14 @@ export class ImpairmentService {
     private environmentService: EnvironmentService,
   ) {}
 
+  setImpairmentSettings(impairment: ImpairmentDTO) {
+    this.impairmentSettingsSubject.next(impairment)
+  }
+
   getImpairment(): Observable<ImpairmentDTO> {
     return this.http.get<ImpairmentDTO>(this.apiUrl).pipe(
       tap((data) => {
+        this.setImpairmentSettings(data)
         this.refresh(
           data.bearer_id,
           data.uplink_environment_id,

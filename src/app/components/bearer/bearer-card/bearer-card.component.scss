@@ -14,12 +14,17 @@
 .bearer-card {
   height: 100%; /* Fills height of the parent */
   width: 100%; /* Fills width of the parent */
+  background-color: transparent !important;
 }
 
 .bearer-card mat-card-title {
   color: #e0e3e2;
   font-size: xx-large;
   padding-bottom: 20px;
+}
+
+.card-img {
+  max-height: 150px;
 }
 
 .bearer-card mat-card-content {

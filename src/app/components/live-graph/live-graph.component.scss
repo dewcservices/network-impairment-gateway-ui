@@ -2,3 +2,14 @@
   position: absolute;
   overflow: hidden;
 }
+.golden-layout-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+canvas {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+}

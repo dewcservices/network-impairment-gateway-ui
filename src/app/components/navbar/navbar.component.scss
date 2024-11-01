@@ -1,0 +1,30 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.company-logo {
+  max-width: 100px;
+  margin-right: 16px;
+}
+
+.navbar-custom {
+  background-color: #a9d5d5;
+  color: black;
+}
+
+.navbar-button {
+  color: darkslategrey !important;
+}
+
+.github-link {
+  color: darkslategrey;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.github-link fa-icon,
+.github-link mat-icon {
+  font-size: 24px;
+}
