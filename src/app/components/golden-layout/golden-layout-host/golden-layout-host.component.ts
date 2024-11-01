@@ -23,7 +23,7 @@ import { ImpairmentFormComponent } from '../../impairment-form/impairment-form.c
 import { NetworkMonitorComponent } from '../../network-monitor/network-monitor.component'
 import { EnvironmentCardComponent } from '../../environment/environment-card/environment-card.component'
 import { BearerCardComponent } from '../../bearer/bearer-card/bearer-card.component'
-// import { LiveGraphComponent } from '../../live-graph/live-graph.component'
+import { LiveGraphComponent } from '../../live-graph/live-graph.component'
 
 // import { FormWizardComponent } from '../../form-wizard/form-wizard.component';
 @Component({
@@ -89,10 +89,10 @@ export class GoldenLayoutHostComponent implements OnDestroy {
       ColorComponent,
     )
 
-    // this.goldenLayoutComponentService.registerComponentType(
-    //   LiveGraphComponent.componentTypeName,
-    //   LiveGraphComponent,
-    // )
+    this.goldenLayoutComponentService.registerComponentType(
+      LiveGraphComponent.componentTypeName,
+      LiveGraphComponent,
+    )
 
     this.goldenLayoutComponentService.registerComponentType(
       EnvironmentCardComponent.componentTypeName,

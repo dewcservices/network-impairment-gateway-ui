@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core'
 import { Observable, Subject } from 'rxjs'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
-  // TODO - replace with env var
-  private wsUrl = 'ws://localhost:8000' // Replace with your backend URL
+  private wsUrl = `${environment.websocketHost}`
   private socket: WebSocket
   private subject: Subject<any>
 

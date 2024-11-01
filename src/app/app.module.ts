@@ -20,6 +20,12 @@ import { ComposableTestComponent } from './pages/composable-test/composable-test
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component'
 import { HomeComponent } from './pages/home/home.component'
 
+import {
+  provideCharts,
+  BaseChartDirective,
+  withDefaultRegisterables,
+} from 'ng2-charts'
+
 import { GoldenLayoutComponentService } from './services/golden-layout/golden-layout-component.service'
 import { BearerFormComponent } from './components/bearer/bearer-form/bearer-form.component'
 import { EnvironmentFormComponent } from './components/environment/environment-form/environment-form.component'
@@ -30,7 +36,8 @@ import { BearerCardComponent } from './components/bearer/bearer-card/bearer-card
 import { EnvironmentService } from './services/environment.service'
 import { BearerService } from './services/bearer.service'
 import { ImpairmentService } from './services/impairment.service'
-// import { LiveGraphComponent } from './components/live-graph/live-graph.component'
+import { LiveGraphComponent } from './components/live-graph/live-graph.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +56,7 @@ import { ImpairmentService } from './services/impairment.service'
     NetworkMonitorComponent,
     EnvironmentCardComponent,
     BearerCardComponent,
+    LiveGraphComponent,
   ],
   imports: [
     // material
@@ -58,6 +66,7 @@ import { ImpairmentService } from './services/impairment.service'
     FormlyModule.forRoot(),
     ReactiveFormsModule,
     FormlyMaterialModule,
+    BaseChartDirective,
   ],
   providers: [
     GoldenLayoutComponentService,
@@ -66,6 +75,7 @@ import { ImpairmentService } from './services/impairment.service'
     BearerService,
     ImpairmentService,
     provideHttpClient(withInterceptorsFromDi()), // Replaces HttpClientModule
+    provideCharts(withDefaultRegisterables()),
   ],
   bootstrap: [AppComponent],
 })
