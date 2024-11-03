@@ -18,7 +18,7 @@ export class ImpairmentService {
     null,
   )
   // Observable streams
-  uplinkEnvironment$ = this.impairmentSettingsSubject.asObservable()
+  impairmentSettings$ = this.impairmentSettingsSubject.asObservable()
 
   constructor(
     private http: HttpClient,

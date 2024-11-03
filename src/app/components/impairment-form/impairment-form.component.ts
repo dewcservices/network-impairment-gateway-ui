@@ -107,15 +107,17 @@ export class ImpairmentFormComponent
         }))
       })
 
-    this.impairmentService.uplinkEnvironment$.subscribe((impairment) => {
-      this.model.bearer = impairment!.bearer_id
-      this.model.uplinkEnvironment = impairment!.bearer_id
-      this.model.downlinkEnvironment = impairment!.downlink_environment_id
-      this.form.patchValue({
-        bearer: this.model.bearer,
-        uplinkEnvironment: this.model.uplinkEnvironment,
-        downlinkEnvironment: this.model.downlinkEnvironment,
-      })
+    this.impairmentService.impairmentSettings$.subscribe((impairment) => {
+      if (impairment) {
+        this.model.bearer = impairment!.bearer_id
+        this.model.uplinkEnvironment = impairment!.bearer_id
+        this.model.downlinkEnvironment = impairment!.downlink_environment_id
+        this.form.patchValue({
+          bearer: this.model.bearer,
+          uplinkEnvironment: this.model.uplinkEnvironment,
+          downlinkEnvironment: this.model.downlinkEnvironment,
+        })
+      }
     })
   }
 
