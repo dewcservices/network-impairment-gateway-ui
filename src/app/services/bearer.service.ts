@@ -8,11 +8,13 @@ import { environment } from '../../environments/environment'
   providedIn: 'root',
 })
 export class BearerService {
-  private apiUrl = `${environment.apiHost}/api/bearers`
+  private readonly apiUrl = `${environment.apiHost}/api/bearers`
 
-  private currentBearerSubject = new BehaviorSubject<BearerDTO | null>(null)
+  private readonly currentBearerSubject = new BehaviorSubject<BearerDTO | null>(
+    null,
+  )
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   // Observable stream for the current bearer
   currentBearer$ = this.currentBearerSubject.asObservable()

@@ -13,11 +13,11 @@ export class ComposableTestComponent implements AfterViewInit {
 
   private _controlsElement!: HTMLElement
 
-  @ViewChild('controls') private _controlsComponent!: ControlsComponent
+  @ViewChild('controls') private readonly _controlsComponent!: ControlsComponent
   @ViewChild('goldenLayoutHost')
-  private _goldenLayoutHostComponent!: GoldenLayoutHostComponent
+  private readonly _goldenLayoutHostComponent!: GoldenLayoutHostComponent
 
-  constructor(private impairmentService: ImpairmentService) {
+  constructor(private readonly impairmentService: ImpairmentService) {
     this.impairmentService.getImpairment().subscribe()
   }
 

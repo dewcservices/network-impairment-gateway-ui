@@ -12,15 +12,14 @@ import { environment } from '../../environments/environment'
   providedIn: 'root',
 })
 export class EnvironmentService {
-  private apiUrl = `${environment.apiHost}/api/environments`
+  private readonly apiUrl = `${environment.apiHost}/api/environments`
 
-  private uplinkEnvironmentSubject = new BehaviorSubject<EnvironmentDTO | null>(
-    null,
-  )
-  private downlinkEnvironmentSubject =
+  private readonly uplinkEnvironmentSubject =
+    new BehaviorSubject<EnvironmentDTO | null>(null)
+  private readonly downlinkEnvironmentSubject =
     new BehaviorSubject<EnvironmentDTO | null>(null)
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   // Observable streams
   uplinkEnvironment$ = this.uplinkEnvironmentSubject.asObservable()

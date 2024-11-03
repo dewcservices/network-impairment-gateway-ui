@@ -11,8 +11,6 @@ export class WebSocketService {
   private socket: WebSocket
   private subject: Subject<any>
 
-  private dataSubject = new Subject<{ txRate: number; rxRate: number }>()
-
   constructor() {
     this.socket = new WebSocket(`${this.wsUrl}/ws/network`)
     this.subject = new Subject<any>()

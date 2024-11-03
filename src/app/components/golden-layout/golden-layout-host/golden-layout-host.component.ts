@@ -39,25 +39,25 @@ import { LiveGraphComponent } from '../../live-graph/live-graph.component'
 })
 export class GoldenLayoutHostComponent implements OnDestroy {
   private _goldenLayout!: GoldenLayout
-  private _goldenLayoutElement: HTMLElement
+  private readonly _goldenLayoutElement: HTMLElement
   private _virtualActive = true
   private _viewContainerRefActive = false
-  private _componentRefMap = new Map<
+  private readonly _componentRefMap = new Map<
     ComponentContainer,
     ComponentRef<BaseComponentDirective>
   >()
   private _goldenLayoutBoundingClientRect: DOMRect = new DOMRect()
 
-  private _goldenLayoutBindComponentEventListener = (
+  private readonly _goldenLayoutBindComponentEventListener = (
     container: ComponentContainer,
     itemConfig: ResolvedComponentItemConfig,
   ) => this.handleBindComponentEvent(container, itemConfig)
-  private _goldenLayoutUnbindComponentEventListener = (
+  private readonly _goldenLayoutUnbindComponentEventListener = (
     container: ComponentContainer,
   ) => this.handleUnbindComponentEvent(container)
 
   @ViewChild('componentViewContainer', { read: ViewContainerRef, static: true })
-  private _componentViewContainerRef!: ViewContainerRef
+  private readonly _componentViewContainerRef!: ViewContainerRef
 
   get goldenLayout() {
     return this._goldenLayout
@@ -73,9 +73,9 @@ export class GoldenLayoutHostComponent implements OnDestroy {
   }
 
   constructor(
-    private _appRef: ApplicationRef,
-    private _elRef: ElementRef<HTMLElement>,
-    private goldenLayoutComponentService: GoldenLayoutComponentService,
+    private readonly _appRef: ApplicationRef,
+    private readonly _elRef: ElementRef<HTMLElement>,
+    private readonly goldenLayoutComponentService: GoldenLayoutComponentService,
   ) {
     this._goldenLayoutElement = this._elRef.nativeElement
   }

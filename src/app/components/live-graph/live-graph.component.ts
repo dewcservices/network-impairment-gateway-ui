@@ -58,12 +58,12 @@ export class LiveGraphComponent
     },
   }
 
-  private txData$ = new BehaviorSubject<number[]>([])
-  private rxData$ = new BehaviorSubject<number[]>([])
-  private labels$ = new BehaviorSubject<string[]>([])
+  private readonly txData$ = new BehaviorSubject<number[]>([])
+  private readonly rxData$ = new BehaviorSubject<number[]>([])
+  private readonly labels$ = new BehaviorSubject<string[]>([])
 
   constructor(
-    private webSocketService: WebSocketService,
+    private readonly webSocketService: WebSocketService,
     elRef: ElementRef,
   ) {
     super(elRef.nativeElement)

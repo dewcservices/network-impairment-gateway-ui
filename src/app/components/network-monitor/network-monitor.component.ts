@@ -5,7 +5,7 @@ import { BaseComponentDirective } from '../golden-layout/base-component.directiv
 @Component({
   selector: 'app-network-monitor',
   templateUrl: './network-monitor.component.html',
-  styleUrl: './network-monitor.component.scss',
+  styles: '',
 })
 export class NetworkMonitorComponent
   extends BaseComponentDirective

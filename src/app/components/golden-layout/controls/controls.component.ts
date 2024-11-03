@@ -26,17 +26,16 @@ export class ControlsComponent implements OnDestroy {
   private _savedLayout: ResolvedLayoutConfig | undefined
 
   private _selectedRegisteredComponentTypeName!: string
-  private _componentTextValue!: string
   private _selectedLayoutName!: string
-  private _dragSources: (DragSource | undefined)[] = []
+  private readonly _dragSources: (DragSource | undefined)[] = []
 
-  @ViewChild('dragMe') private _dragMeElementRef!: ElementRef
+  @ViewChild('dragMe') private readonly _dragMeElementRef!: ElementRef
   @ViewChild('virtualRadio')
-  private _virtualRadioElementRef!: ElementRef<HTMLInputElement>
+  private readonly _virtualRadioElementRef!: ElementRef<HTMLInputElement>
   @ViewChild('viewComponentRefRadio')
-  private _viewComponentRefRadioElementRef!: ElementRef<HTMLInputElement>
+  private readonly _viewComponentRefRadioElementRef!: ElementRef<HTMLInputElement>
   @ViewChild('appRefRadio')
-  private _appRefRadioElementRef!: ElementRef<HTMLInputElement>
+  private readonly _appRefRadioElementRef!: ElementRef<HTMLInputElement>
 
   public registeredComponentTypeNames!: readonly string[]
   public initialRegisteredComponentTypeName!: string
@@ -52,8 +51,8 @@ export class ControlsComponent implements OnDestroy {
   }
 
   constructor(
-    private _elRef: ElementRef<HTMLElement>,
-    private _goldenLayoutComponentService: GoldenLayoutComponentService,
+    private readonly _elRef: ElementRef<HTMLElement>,
+    private readonly _goldenLayoutComponentService: GoldenLayoutComponentService,
   ) {}
 
   ngOnDestroy() {
@@ -87,14 +86,7 @@ export class ControlsComponent implements OnDestroy {
     })
   }
 
-  handleEmbeddedRadioClick() {
-    this._goldenLayoutHostComponent.setVirtualActive(
-      this._virtualRadioElementRef.nativeElement.checked,
-    )
-    this.updateViewComponentRefRadio()
-  }
-
-  handleVirtualRadioClick() {
+  handleRadioClick() {
     this._goldenLayoutHostComponent.setVirtualActive(
       this._virtualRadioElementRef.nativeElement.checked,
     )

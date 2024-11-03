@@ -19,12 +19,12 @@ export class ImpairmentPageComponent implements AfterViewInit {
   @ViewChild('placeHolder', { read: ViewContainerRef })
   viewContainer!: ViewContainerRef
   @ViewChild('goldenLayoutHost')
-  private _goldenLayoutHostComponent!: GoldenLayoutHostComponent
+  private readonly _goldenLayoutHostComponent!: GoldenLayoutHostComponent
   private _goldenLayout!: GoldenLayout
   public registeredComponentTypeNames!: readonly string[]
   constructor(
-    private impairmentService: ImpairmentService,
-    private _goldenLayoutComponentService: GoldenLayoutComponentService,
+    private readonly impairmentService: ImpairmentService,
+    private readonly _goldenLayoutComponentService: GoldenLayoutComponentService,
   ) {
     this.impairmentService.getImpairment().subscribe()
   }

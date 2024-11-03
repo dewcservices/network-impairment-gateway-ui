@@ -12,9 +12,14 @@ import { BaseComponentDirective } from '../../components/golden-layout/base-comp
   providedIn: 'root',
 })
 export class GoldenLayoutComponentService {
-  private _componentTypeMap = new Map<string, Type<BaseComponentDirective>>()
+  private readonly _componentTypeMap = new Map<
+    string,
+    Type<BaseComponentDirective>
+  >()
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(
+    private readonly componentFactoryResolver: ComponentFactoryResolver,
+  ) {}
 
   registerComponentType(
     name: string,
