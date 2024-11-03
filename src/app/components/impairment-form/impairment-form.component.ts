@@ -67,11 +67,11 @@ export class ImpairmentFormComponent
 
   constructor(
     @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
-    private container: ComponentContainer,
+    private readonly container: ComponentContainer,
     elRef: ElementRef,
-    private envService: EnvironmentService,
-    private bearerService: BearerService,
-    private impairmentService: ImpairmentService,
+    private readonly envService: EnvironmentService,
+    private readonly bearerService: BearerService,
+    private readonly impairmentService: ImpairmentService,
   ) {
     super(elRef.nativeElement)
     this.container.stateRequestEvent = () =>
