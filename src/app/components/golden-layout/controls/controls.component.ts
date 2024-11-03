@@ -14,7 +14,6 @@ import {
 import { GoldenLayoutComponentService } from '../../../services/golden-layout/golden-layout-component.service'
 import { GoldenLayoutHostComponent } from '../golden-layout-host/golden-layout-host.component'
 import { predefinedLayoutNames, predefinedLayouts } from '../predefined-layouts'
-import { TextComponent } from '../text/text.component'
 
 @Component({
   selector: 'app-controls',
@@ -41,7 +40,6 @@ export class ControlsComponent implements OnDestroy {
 
   public registeredComponentTypeNames!: readonly string[]
   public initialRegisteredComponentTypeName!: string
-  public initialComponentTextValue = 'Water'
   public layoutNames!: readonly string[]
   public initialLayoutName!: string
   public saveLayoutButtonDisabled = true
@@ -80,7 +78,7 @@ export class ControlsComponent implements OnDestroy {
         this.registeredComponentTypeNames[0]
       this.initialRegisteredComponentTypeName =
         this._selectedRegisteredComponentTypeName
-      this._componentTextValue = this.initialComponentTextValue
+
       this.layoutNames = predefinedLayoutNames
       this._selectedLayoutName = this.layoutNames[0]
       this.initialLayoutName = this._selectedLayoutName
@@ -119,29 +117,9 @@ export class ControlsComponent implements OnDestroy {
     this._selectedRegisteredComponentTypeName = value
   }
 
-  handleComponentTextInputInput(value: string) {
-    this._componentTextValue = value
-  }
-
   handleAddComponentButtonClick() {
     const componentType = this._selectedRegisteredComponentTypeName
     this._goldenLayout.addComponent(componentType)
-  }
-
-  handleAddTextComponentButtonClick() {
-    // this demonstrates how to access created Angular component
-    const goldenLayoutComponent = this._goldenLayout.newComponent('Text') // do not set state here
-    const componentRef = this._goldenLayoutHostComponent.getComponentRef(
-      goldenLayoutComponent.container,
-    )
-    if (componentRef === undefined) {
-      throw new Error('Unexpected error getting ComponentRef')
-    } else {
-      const textComponent = componentRef.instance
-      const unknownComponent = textComponent as unknown
-      const iTextComponent = unknownComponent as TextComponent
-      iTextComponent.setInitialValue(this._componentTextValue)
-    }
   }
 
   handleLayoutSelectChange(value: string) {
