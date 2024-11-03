@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { ChartConfiguration, ChartOptions } from 'chart.js'
 import { WebSocketService } from '../../services/web-socket.service'
-import { BehaviorSubject, interval } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
+import { BehaviorSubject } from 'rxjs'
+
 import { BaseComponentDirective } from '../golden-layout/base-component.directive'
 import { BaseChartDirective } from 'ng2-charts'
 
@@ -16,23 +16,29 @@ export class LiveGraphComponent
   implements OnInit
 {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective
+  graphMaxTime = 120
+  graphSlice = -1 * this.graphMaxTime
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     datasets: [
       {
+        type: 'line',
         data: [],
         label: 'Tx Rate',
         fill: false,
         tension: 0.5,
         borderColor: 'blue',
         backgroundColor: 'rgba(0, 0, 255, 0.3)',
+        animation: false,
       },
       {
+        type: 'line',
         data: [],
         label: 'Rx Rate',
         fill: false,
         tension: 0.5,
         borderColor: 'green',
         backgroundColor: 'rgba(0, 255, 0, 0.3)',
+        animation: false,
       },
     ],
     labels: [],
@@ -66,15 +72,9 @@ export class LiveGraphComponent
   ngOnInit(): void {
     this.initializeChart()
 
-    // Subscribe to WebSocket data updates
-    this.webSocketService.dataStream
-      .pipe(
-        switchMap((data) => {
-          this.updateChart(data.txRate, data.rxRate)
-          return interval(1000) // Update every second
-        }),
-      )
-      .subscribe()
+    this.webSocketService.getNetworkStats().subscribe((data) => {
+      this.updateChart(data.bytes_sent_per_sec, data.bytes_recv_per_sec)
+    })
   }
 
   private initializeChart(): void {
@@ -87,9 +87,11 @@ export class LiveGraphComponent
     const currentTime = new Date().toLocaleTimeString()
 
     // Update data arrays and emit new values
-    const updatedTxData = [...this.txData$.value, txRate].slice(-20) // Keep last 20 points
-    const updatedRxData = [...this.rxData$.value, rxRate].slice(-20)
-    const updatedLabels = [...this.labels$.value, currentTime].slice(-20)
+    const updatedTxData = [...this.txData$.value, txRate].slice(this.graphSlice) // Keep last 20 points
+    const updatedRxData = [...this.rxData$.value, rxRate].slice(this.graphSlice)
+    const updatedLabels = [...this.labels$.value, currentTime].slice(
+      this.graphSlice,
+    )
 
     this.txData$.next(updatedTxData)
     this.rxData$.next(updatedRxData)
