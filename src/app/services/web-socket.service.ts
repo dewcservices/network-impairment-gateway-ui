@@ -7,9 +7,9 @@ import { environment } from '../../environments/environment'
   providedIn: 'root',
 })
 export class WebSocketService {
-  private wsUrl = `${environment.websocketHost}`
-  private socket: WebSocket
-  private subject: Subject<any>
+  private readonly wsUrl = `${environment.websocketHost}`
+  private readonly socket: WebSocket
+  private readonly subject: Subject<any>
 
   constructor() {
     this.socket = new WebSocket(`${this.wsUrl}/ws/network`)
