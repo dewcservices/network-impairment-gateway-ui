@@ -12,9 +12,6 @@ import { FormlyMaterialModule } from '@ngx-formly/material'
 import { MaterialModules } from './material.modules'
 import { GoldenLayoutHostComponent } from './components/golden-layout/golden-layout-host/golden-layout-host.component'
 import { ControlsComponent } from './components/golden-layout/controls/controls.component'
-import { TextComponent } from './components/golden-layout/text/text.component'
-import { BooleanComponent } from './components/golden-layout/boolean/boolean.component'
-import { ColorComponent } from './components/golden-layout/color/color.component'
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component'
 import { ComposableTestComponent } from './pages/composable-test/composable-test.component'
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component'
@@ -43,9 +40,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     AppComponent,
     GoldenLayoutHostComponent,
     ControlsComponent,
-    TextComponent,
-    BooleanComponent,
-    ColorComponent,
     NotFoundPageComponent,
     ComposableTestComponent,
     DefaultLayoutComponent,

@@ -15,9 +15,6 @@ import {
   ResolvedComponentItemConfig,
 } from 'golden-layout'
 import { BaseComponentDirective } from '../base-component.directive'
-import { BooleanComponent } from '../boolean/boolean.component'
-import { ColorComponent } from '../color/color.component'
-import { TextComponent } from '../text/text.component'
 import { GoldenLayoutComponentService } from '../../../services/golden-layout/golden-layout-component.service'
 import { ImpairmentFormComponent } from '../../impairment-form/impairment-form.component'
 import { NetworkMonitorComponent } from '../../network-monitor/network-monitor.component'
@@ -85,11 +82,6 @@ export class GoldenLayoutHostComponent implements OnDestroy {
 
   async load(): Promise<void> {
     this.goldenLayoutComponentService.registerComponentType(
-      ColorComponent.componentTypeName,
-      ColorComponent,
-    )
-
-    this.goldenLayoutComponentService.registerComponentType(
       LiveGraphComponent.componentTypeName,
       LiveGraphComponent,
     )
@@ -112,15 +104,6 @@ export class GoldenLayoutHostComponent implements OnDestroy {
       ImpairmentFormComponent.componentTypeName,
       ImpairmentFormComponent,
     )
-    this.goldenLayoutComponentService.registerComponentType(
-      TextComponent.componentTypeName,
-      TextComponent,
-    )
-    this.goldenLayoutComponentService.registerComponentType(
-      BooleanComponent.componentTypeName,
-      BooleanComponent,
-    )
-    //this.goldenLayoutComponentService.registerComponentType(FormWizardComponent.componentTypeName, FormWizardComponent);
   }
 
   ngOnDestroy() {
