@@ -13,11 +13,7 @@ export abstract class BaseComponentDirective {
   }
 
   setVisibility(visible: boolean) {
-    if (visible) {
-      this.rootHtmlElement.style.display = ''
-    } else {
-      this.rootHtmlElement.style.display = 'none'
-    }
+    this.rootHtmlElement.style.display = visible ? '' : 'none'
   }
 
   setZIndex(value: string) {
