@@ -14,16 +14,8 @@ export class EnvironmentCardComponent
   implements OnInit
 {
   private readonly envType: string
-  //selectedEnvironment: EnvironmentDTO | null = null
-  selectedEnvironment: EnvironmentDTO | null = {
-    title: 'Intermitent',
-    description: 'Intermitent.',
-    netem: {
-      delay: { time: 500, jitter: 50, correlation: 25 },
-      loss: { percentage: 2, interval: 1000, correlation: 15 },
-      corrupt: { percentage: 1, correlation: 10 },
-    },
-  }
+  selectedEnvironment: EnvironmentDTO | null = null
+
   constructor(
     @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
     private readonly container: ComponentContainer,
