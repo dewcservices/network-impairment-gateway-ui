@@ -26,8 +26,6 @@ import {
 } from 'ng2-charts'
 
 import { GoldenLayoutComponentService } from './services/golden-layout/golden-layout-component.service'
-import { BearerFormComponent } from './components/bearer/bearer-form/bearer-form.component'
-import { EnvironmentFormComponent } from './components/environment/environment-form/environment-form.component'
 import { ImpairmentFormComponent } from './components/impairment-form/impairment-form.component'
 import { NetworkMonitorComponent } from './components/network-monitor/network-monitor.component'
 import { EnvironmentCardComponent } from './components/environment/environment-card/environment-card.component'
@@ -51,8 +49,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     NotFoundPageComponent,
     ComposableTestComponent,
     DefaultLayoutComponent,
-    BearerFormComponent,
-    EnvironmentFormComponent,
     ImpairmentFormComponent,
     NetworkMonitorComponent,
     EnvironmentCardComponent,
