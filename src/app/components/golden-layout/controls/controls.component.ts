@@ -93,13 +93,7 @@ export class ControlsComponent implements OnDestroy {
     this.updateViewComponentRefRadio()
   }
 
-  handleViewComponentRefRadioClick() {
-    this._goldenLayoutHostComponent.setViewContainerRefActive(
-      this._viewComponentRefRadioElementRef.nativeElement.checked,
-    )
-  }
-
-  handleAppRefRadioClick() {
+  handleViewComponentRefOrAppRefRadioClick() {
     this._goldenLayoutHostComponent.setViewContainerRefActive(
       this._viewComponentRefRadioElementRef.nativeElement.checked,
     )
