@@ -13,7 +13,7 @@ export class EnvironmentCardComponent
   extends BaseComponentDirective
   implements OnInit
 {
-  private envType: string
+  private readonly envType: string
   //selectedEnvironment: EnvironmentDTO | null = null
   selectedEnvironment: EnvironmentDTO | null = {
     title: 'Intermitent',
@@ -26,9 +26,9 @@ export class EnvironmentCardComponent
   }
   constructor(
     @Inject(BaseComponentDirective.GoldenLayoutContainerInjectionToken)
-    private container: ComponentContainer,
+    private readonly container: ComponentContainer,
     elRef: ElementRef,
-    private envService: EnvironmentService,
+    private readonly envService: EnvironmentService,
   ) {
     super(elRef.nativeElement)
     this.container.stateRequestEvent = () =>
