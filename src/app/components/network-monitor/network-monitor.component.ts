@@ -22,7 +22,7 @@ export class NetworkMonitorComponent
 
   constructor(
     elRef: ElementRef,
-    private webSocketService: WebSocketService,
+    private readonly webSocketService: WebSocketService,
   ) {
     super(elRef.nativeElement)
   }
