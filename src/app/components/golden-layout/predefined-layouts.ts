@@ -28,7 +28,7 @@ const impairmentGatewayConfig: LayoutConfig = {
           {
             type: ItemType.stack,
             height: 70,
-            header: { show: false, popout: false },
+            header: { show: 'top', popout: false },
             content: [
               {
                 title: 'Network Graph',
