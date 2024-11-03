@@ -13,17 +13,16 @@ import { environment } from '../../environments/environment'
   providedIn: 'root',
 })
 export class ImpairmentService {
-  private apiUrl = `${environment.apiHost}/api/settings/`
-  private impairmentSettingsSubject = new BehaviorSubject<ImpairmentDTO | null>(
-    null,
-  )
+  private readonly apiUrl = `${environment.apiHost}/api/settings/`
+  private readonly impairmentSettingsSubject =
+    new BehaviorSubject<ImpairmentDTO | null>(null)
   // Observable streams
   impairmentSettings$ = this.impairmentSettingsSubject.asObservable()
 
   constructor(
-    private http: HttpClient,
-    private bearerService: BearerService,
-    private environmentService: EnvironmentService,
+    private readonly http: HttpClient,
+    private readonly bearerService: BearerService,
+    private readonly environmentService: EnvironmentService,
   ) {}
 
   setImpairmentSettings(impairment: ImpairmentDTO) {
