@@ -3,9 +3,9 @@ name: Angular CI Workflow
 on: [push, pull_request]
 
 env:
-  DOCKER_IMAGE_NAME: ''
-  SONAR_ORGANIZATION: ''
-  SONAR_PROJECT_KEY: ''
+  DOCKER_IMAGE_NAME: 'network-impairment-gateway-ui'
+  SONAR_ORGANIZATION: 'dewcservices'
+  SONAR_PROJECT_KEY: 'dewcservices_network-impairment-gateway-ui'
 
 jobs:
   build:
