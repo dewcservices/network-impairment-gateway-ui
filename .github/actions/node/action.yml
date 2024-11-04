@@ -102,10 +102,6 @@ runs:
       run: npm run build --prod
       shell: bash
 
-    - name: Check dist folder contents
-      run: ls -R dist
-      shell: bash
-
     - name: Build Docker image for testing
       uses: docker/build-push-action@v5
       with:
