@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const environment = {
-  production: true,
-  apiHost: 'http://localhost:8000',
-  websocketHost: 'ws://localhost:8000',
+  production: (window as any)?.env?.production,
+  apiHost: (window as any)?.env?.apiHost,
+  websocketHost: (window as any)?.env?.websocketHost,
 }
