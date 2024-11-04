@@ -192,6 +192,7 @@ runs:
       if: ${{ steps.branch-names.outputs.current_branch == 'main' && github.event_name == 'push' }}
       uses: docker/build-push-action@v5
       with:
+        context: .
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
