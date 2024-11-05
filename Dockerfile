@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged
+FROM nginxinc/nginx-unprivileged:1.27.2
 
 #### copy nginx conf
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
