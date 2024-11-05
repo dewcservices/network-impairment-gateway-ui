@@ -1,4 +1,4 @@
-;(function (window) {
+(function (window) {
   window.env = window.env || {}
   // env vars
   window['env']['production'] = true
